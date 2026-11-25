@@ -23,6 +23,10 @@
 
 ### Antigravity IDE 2.8.0
 
+「设置 → 通用」页面。左侧项目名称已打码。
+
+![Antigravity IDE 2.8.0 中文设置页，项目名称已打码](docs/screenshots/antigravity-ide-settings.png)
+
 智能体面板里的模型选择器显示中文状态和推理强度。将鼠标移到模型旁的 ⓘ，可以查看该模型的中文提示。
 
 ![Antigravity IDE 2.8.0 中文模型选择器](docs/screenshots/antigravity-ide-models.png)
