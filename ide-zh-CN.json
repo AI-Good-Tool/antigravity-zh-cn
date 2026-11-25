@@ -1,0 +1,73 @@
+{
+  "exact": {
+    "Antigravity Settings": "Antigravity 设置",
+    "Antigravity Settings Viewer": "Antigravity 设置",
+    "Open Antigravity Settings": "打开 Antigravity 设置",
+    "Checking your setup...": "正在检查配置…",
+    "Ask Antigravity": "询问 Antigravity",
+    "Ask Antigravity anything": "向 Antigravity 提问",
+    "Ask anything": "输入你的问题",
+    "Best of N Models": "多模型择优",
+    "Reasoning effort": "推理强度",
+    "Reasoning Effort": "推理强度",
+    "Reasoning Strength": "推理强度",
+    "Editor": "编辑器",
+    "Tab": "补全",
+    "Privacy": "隐私",
+    "No workspace selected": "未选择工作区"
+  },
+  "officialSkillDescriptions": {
+    "agy-customizations": {
+      "source": "Comprehensive guide and reference for the Antigravity Customization System. Use to explain how customizations work, their loading priority, discovery mechanisms, and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
+      "translation": "Antigravity 自定义功能指南。介绍自定义内容的工作方式、加载优先级和发现机制，以及如何创建技能、规则、插件、钩子和 MCP 服务。"
+    },
+    "antigravity-guide": {
+      "source": "Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
+      "translation": "Google Antigravity（AGY）的使用指南、速查手册和文档索引，涵盖 agy 命令行、Antigravity 2.0、IDE、Python SDK、斜杠命令、快捷键，以及技能、规则、MCP 和辅助进程等自定义功能。适用于 Antigravity、agy 或 IDE 的使用、配置和定制问题。"
+    },
+    "automation": {
+      "source": "Interactive guide to design and create a scheduled background automation. Use this skill when the user wants to create an automated or recurring scheduled task (e.g. \"summarize my emails every morning\", \"every Monday send me a to-do list\"). Also triggered by the /automation slash command.",
+      "translation": "交互式向导，用来设计和创建定时运行的后台自动化。适用于自动或重复执行的任务，例如每天早上汇总邮件，或每周一发送待办清单。也可以通过 /automation 命令打开。"
+    },
+    "conversations": {
+      "source": "Manage local Antigravity conversations programmatically over HTTP+JSON: create a new conversation (with an optional initial prompt), list conversations, read conversation metadata and run state, rename, archive, pin, star, tag, or group conversations, and delete conversations. Use when the user asks to list, rename, pin, star, archive, delete, or start conversations, including the current one, or when a script, plugin, or automation needs to manage conversations outside of subagent tool calls.",
+      "translation": "通过 HTTP+JSON 接口管理本地 Antigravity 会话。可查看列表、读取会话信息和运行状态，也可新建会话并附带初始提示，或对会话重命名、归档、置顶、加星标、贴标签、分组及删除。适用于用户管理当前或其他会话，也可供脚本、插件和自动化调用。"
+    },
+    "generative_ui": {
+      "source": "How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.",
+      "translation": "在聊天里直接显示交互式 HTML 小组件，也可以做成独立的成果。适合展示示意图、数据可视化、交互控件、分步教程，以及其他需要界面呈现的内容。"
+    },
+    "mcp-app-development": {
+      "source": "Build, package, and debug MCP Apps for Antigravity: MCP server tools whose results render as interactive UI in the conversation, in the side pane, or full-page from the sidebar. Use when adding a UI to an MCP tool, building or theming the app itself, packaging it as a plugin, or debugging an app that doesn't render or behave as expected.",
+      "translation": "构建、打包和调试 Antigravity 的 MCP 应用。MCP 工具的结果可以在会话、侧面板或侧栏打开的完整页面中显示为交互界面。适用于给 MCP 工具添加界面、开发或美化应用、打包插件，以及排查显示或操作异常。"
+    },
+    "migrate-agent-settings": {
+      "source": "Migrates the user's MCP servers, skills, slash commands, subagents, and instruction files from other coding agents (Claude Code, Codex, Cursor, Gemini CLI) into one new Antigravity plugin. Use when the user wants to bring over, import, or migrate their setup or config from another agent or tool. Don't use for installing Marketplace plugins or authoring a new plugin from scratch (use the plugin skill).",
+      "translation": "把 Claude Code、Codex、Cursor 或 Gemini CLI 的 MCP 服务、技能、斜杠命令、子智能体和指令文件导入一个新的 Antigravity 插件。适用于迁移其他工具的配置。安装市场插件或从头制作插件时可使用 plugin 技能。"
+    },
+    "migrate-workflows": {
+      "source": "Automatically migrate legacy workflows to modern skills across global and workspace configurations. Scans for existing workflows, creates target SKILL.md files, and safely archives old workflow files.",
+      "translation": "将全局和工作区配置中的旧版工作流自动迁移为技能。它会扫描已有工作流、生成对应的 SKILL.md 文件，并归档旧文件。"
+    },
+    "permissioned-github": {
+      "source": "Guidelines for interacting with GitHub and request permissions from the user when commands fail due to restrictions in the agent environment.",
+      "translation": "提供使用 GitHub 的操作指引。命令因智能体环境的权限限制而失败时，可按指引向用户申请授权。"
+    },
+    "plugin": {
+      "source": "How to manage and create plugins — namespaced bundles of skills, agents, rules, MCP servers and hooks that install, enable and disable as a single unit. Use this skill when the user wants to enable, disable, install or uninstall a plugin, when they want to create a new plugin, or when a new customization should be packaged into a plugin rather than left loose. Also triggered by the /plugin slash command. Don't use for the underlying customization system itself — discovery roots, loading priority, or authoring a standalone skill, agent, rule, hook or MCP server outside a plugin; see the customizations guide skill for those.",
+      "translation": "创建和管理插件。插件可打包技能、智能体、规则、MCP 服务和钩子，统一安装、启用或停用。适用于安装、卸载、启用、停用或制作插件，也可通过 /plugin 命令打开。自定义内容的查找目录、加载优先级和独立组件的编写方式，可参考自定义功能指南。"
+    },
+    "run-workflow": {
+      "source": "How to write and run a dynamic workflow script with the `run_workflow` tool: a Python script that orchestrates many agents with `agent`, `parallel`, `pipeline`, and `phase`. Use when a task splits into many independent or staged pieces of agent work (fan out over files, modules, bugs, or review angles, then aggregate), or when the user asks for a workflow. Don't use for a single delegated task (use a subagent) or for legacy workflow files (see migrate-workflows).",
+      "translation": "用 `run_workflow` 编写并运行动态 Python 工作流，通过 `agent`、`parallel`、`pipeline` 和 `phase` 编排多个智能体。适合把任务按文件、模块、问题或审查角度拆开，再汇总结果。单项委托可用子智能体，旧版工作流可参考 migrate-workflows。"
+    },
+    "swarm": {
+      "source": "(Preview & Quota Heavy) Run a swarm: several agents working in parallel on one task, each in its own conversation, collaborating through a shared message board. Use when the work splits into pieces that can be done at the same time, or when a second pair of eyes should check the first pair's work.",
+      "translation": "（预览功能，消耗额度较多）让多个智能体并行处理同一个任务。每个智能体有自己的会话，并通过共享留言板协作。适用于可以并行拆分的任务，也适合请另一个智能体复核结果。"
+    },
+    "ui-plugin-navigation": {
+      "source": "Discover UI plugin panels relevant to the current task and surface a one-click pill in chat to open (toggle) them in the side pane. Use when a running UI plugin's panel would help with what the user is doing, or right after the user enables a new UI plugin pane and a shortcut to open it is handy.",
+      "translation": "查找与当前任务相关的插件面板，在聊天中显示一个快捷按钮，方便在侧面板里打开或关闭。适用于已有插件面板能帮助当前任务，或刚启用插件、需要快速打开面板时。"
+    }
+  }
+}
