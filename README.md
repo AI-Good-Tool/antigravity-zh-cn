@@ -2,7 +2,9 @@
 
 在 macOS 或 Windows 上一键打开 Google Antigravity 桌面版和 Antigravity IDE 的简体中文界面，也可以一键切回英文。脚本从 Google 官方应用生成单独的中文副本，切回英文时打开官方原版。
 
-[下载 Windows 一键切换脚本](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/tag/windows-v1.0.0) · [Windows 使用方法](#windows-使用方法) · [macOS 使用方法](#macos-使用方法) · [设置截图](#界面截图)
+**[下载 macOS 版 ZIP](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip)** · **[下载 Windows 版 ZIP](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip)**
+
+[macOS 使用方法](#macos-使用方法) · [Windows 使用方法](#windows-使用方法) · [设置截图](#界面截图)
 
 ## 适配版本
 
@@ -73,7 +75,7 @@ Antigravity IDE 2.8.0 的中文通用设置，左侧项目名称已打码。
 ### 使用前准备
 
 1. 从 Google 官网安装桌面版或独立 IDE。把相应的 `Antigravity.app` 或 `Antigravity IDE.app` 放在「应用程序」目录（`/Applications` 或 `~/Applications`）。[官方下载](https://antigravity.google/download)
-2. 在本仓库选择 **Code → Download ZIP**，解压后保留整个文件夹。启动脚本会从同一个文件夹读取词库和翻译代码。
+2. 打开 macOS Release，在 **Assets** 下载 **`Antigravity-macOS-zh-CN.zip`**。在访达双击 ZIP 解压，保留整个文件夹。四个 `.command` 脚本都在解压目录的第一层，并从同一个目录读取词库和翻译代码。[macOS Release](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/tag/macos-v1.0.0)
 3. 确认终端可以执行 `/usr/bin/python3 --version`。如果 macOS 提示安装命令行开发者工具，可以运行 `xcode-select --install`，安装完成后再运行脚本。
 4. **使用 IDE 时**，先在官方 IDE 按 `⇧⌘X` 打开扩展面板，搜索并安装 `MS-CEINTL.vscode-language-pack-zh-hans`。也可以下载 `.vsix`，通过命令面板的 **Extensions: Install from VSIX…** 安装。语言包会翻译编辑器自身的菜单和设置。[Microsoft 简体中文语言包](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 
