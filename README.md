@@ -3,14 +3,12 @@
 在 macOS 或 Windows 上一键打开 Google Antigravity 桌面版和 Antigravity IDE 的简体中文界面，也可以一键切回英文。脚本从 Google 官方应用生成单独的中文副本，切回英文时打开官方原版。
 
 <p align="center">
-  <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip"><picture>
-    <source media="(min-width: 600px)" srcset="docs/downloads/macos.svg" width="208" height="80">
-    <img src="docs/downloads/macos.svg" width="48%" alt="下载 macOS 版 ZIP。App 2.35.1（兼容 2.34.0），IDE 2.8.0。">
-  </picture></a>
-  <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip"><picture>
-    <source media="(min-width: 600px)" srcset="docs/downloads/windows.svg" width="208" height="80">
-    <img src="docs/downloads/windows.svg" width="48%" alt="下载 Windows 版 ZIP。App 2.35.1，IDE 2.8.0。">
-  </picture></a>
+  <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip"><picture><source
+    media="(min-width: 600px)" srcset="docs/downloads/macos.svg" width="208" height="80"><img
+    src="docs/downloads/macos.svg" width="48%" alt="下载 macOS 版 ZIP。App 2.35.1（兼容 2.34.0），IDE 2.8.0。"></picture></a>
+  <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip"><picture><source
+    media="(min-width: 600px)" srcset="docs/downloads/windows.svg" width="208" height="80"><img
+    src="docs/downloads/windows.svg" width="48%" alt="下载 Windows 版 ZIP。App 2.35.1，IDE 2.8.0。"></picture></a>
 </p>
 
 [macOS 使用方法](#macos-使用方法) · [Windows 使用方法](#windows-使用方法) · [设置截图](#界面截图)
