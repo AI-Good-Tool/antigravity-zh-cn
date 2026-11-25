@@ -2,9 +2,19 @@ import { app, webFrameMain } from 'electron';
 import { readFileSync } from 'node:fs';
 
 const workbench = '../vs/code/electron-browser/workbench/';
-const editorPath = new URL(workbench + 'workbench.html', import.meta.url).pathname;
-const managerPath = new URL(workbench + 'workbench-jetski-agent.html', import.meta.url).pathname;
+const editorPath = comparablePath(new URL(workbench + 'workbench.html', import.meta.url).pathname);
+const managerPath = comparablePath(new URL(workbench + 'workbench-jetski-agent.html', import.meta.url).pathname);
 const renderer = readFileSync(new URL('./renderer.js', import.meta.url), 'utf8');
+
+function comparablePath(pathname) {
+  // VS Code and file: URLs can encode or capitalize the Windows drive differently.
+  if (process.platform !== 'win32') return pathname;
+  try {
+    return decodeURIComponent(pathname).toLowerCase();
+  } catch {
+    return null;
+  }
+}
 
 function parseUrl(value) {
   return URL.canParse(value) ? new URL(value) : null;
@@ -33,17 +43,18 @@ app.on('web-contents-created', (_event, contents) => {
   contents.on('did-frame-finish-load', (_finish, isMainFrame, processId, routingId) => {
     const top = parseUrl(contents.getURL());
     if (top?.protocol !== 'vscode-file:' || top.hostname !== 'vscode-app') return;
-    if (top.pathname !== editorPath && top.pathname !== managerPath) return;
+    const topPath = comparablePath(top.pathname);
+    if (topPath !== editorPath && topPath !== managerPath) return;
 
     const frame = webFrameMain.fromId(processId, routingId);
     if (!frame || frame.isDestroyed()) return;
     const url = parseUrl(frame.url);
-    if (isMainFrame ? top.pathname !== managerPath : !isLocalAgentPanel(url, frame)) return;
+    if (isMainFrame ? topPath !== managerPath : !isLocalAgentPanel(url, frame)) return;
 
     // Check navigation again in the frame in case it changed before execution.
     const check = isMainFrame
       ? `location.protocol === 'vscode-file:' && location.hostname === 'vscode-app' &&
-          location.pathname === ${JSON.stringify(managerPath)}`
+          location.pathname === ${JSON.stringify(top.pathname)}`
       : `window !== window.top && location.origin === ${JSON.stringify(url.origin)}`;
     const script = `(() => {
       if (!(${check}) || window.__AGY_I18N_INITIALIZED__) return;

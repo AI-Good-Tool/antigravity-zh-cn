@@ -1,0 +1,2 @@
+# Keep the tested CRLF batch files in repository downloads as well as checkouts.
+/windows/*.cmd -text
