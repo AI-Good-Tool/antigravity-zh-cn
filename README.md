@@ -2,7 +2,10 @@
 
 在 macOS 或 Windows 上一键打开 Google Antigravity 桌面版和 Antigravity IDE 的简体中文界面，也可以一键切回英文。脚本从 Google 官方应用生成单独的中文副本，切回英文时打开官方原版。
 
-**[下载 macOS 版 ZIP](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip)** · **[下载 Windows 版 ZIP](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip)**
+| 下载脚本 | Antigravity App | Antigravity IDE |
+| --- | --- | --- |
+| [![下载 macOS 版 ZIP](https://img.shields.io/badge/macOS-%E4%B8%8B%E8%BD%BD%20ZIP-5B3AB8?style=for-the-badge&labelColor=24292F)](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip) | **2.35.1**（兼容 **2.34.0**） | **2.8.0** |
+| [![下载 Windows 版 ZIP](https://img.shields.io/badge/Windows-%E4%B8%8B%E8%BD%BD%20ZIP-0965B4?style=for-the-badge&labelColor=24292F)](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip) | **2.35.1** | **2.8.0** |
 
 [macOS 使用方法](#macos-使用方法) · [Windows 使用方法](#windows-使用方法) · [设置截图](#界面截图)
 
