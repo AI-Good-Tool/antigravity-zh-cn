@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="80" viewBox="0 0 208 80">
+  <style>
+    .versions { fill: #1f2328; }
+    @media (prefers-color-scheme: dark) {
+      .versions { fill: #e6edf3; }
+    }
+  </style>
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <rect x="24" y="2" width="160" height="28" rx="4" fill="#5b3ab8"/>
+    <path d="M28 2h74v28H28a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4Z" fill="#24292f"/>
+    <g fill="#fff" font-size="13" font-weight="700">
+      <text x="63" y="20">macOS</text>
+      <text x="143" y="20">下载 ZIP</text>
+    </g>
+    <g class="versions" font-size="15">
+      <text x="104" y="52">App <tspan font-weight="700">2.35.1</tspan>（兼容 <tspan font-weight="700">2.34.0</tspan>）</text>
+      <text x="104" y="73">IDE <tspan font-weight="700">2.8.0</tspan></text>
+    </g>
+  </g>
+</svg>
