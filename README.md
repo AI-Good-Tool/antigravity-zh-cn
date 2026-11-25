@@ -4,14 +4,14 @@
 
 <table align="center">
   <tr>
-    <td align="center" width="220">
+    <td align="center" valign="top" width="244">
       <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip">
         <img alt="下载 macOS 版 ZIP" src="https://img.shields.io/badge/macOS-%E4%B8%8B%E8%BD%BD%20ZIP-5B3AB8?style=for-the-badge&amp;labelColor=24292F">
       </a><br>
       App <strong>2.35.1</strong>（兼容 <strong>2.34.0</strong>）<br>
       IDE <strong>2.8.0</strong>
     </td>
-    <td align="center" width="220">
+    <td align="center" valign="top" width="244">
       <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip">
         <img alt="下载 Windows 版 ZIP" src="https://img.shields.io/badge/Windows-%E4%B8%8B%E8%BD%BD%20ZIP-0965B4?style=for-the-badge&amp;labelColor=24292F">
       </a><br>
