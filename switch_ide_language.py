@@ -10,7 +10,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from switch_language import PLIST, run, sha256, verify_signature
+from switch_language import PLIST, run, sha256, sign_local_copy, verify_signature
 
 
 HERE = Path(__file__).resolve().parent
@@ -27,7 +27,7 @@ GOOGLE_SIGNATURE = (
     'identifier "com.google.antigravity-ide" and anchor apple generic '
     'and certificate leaf[subject.OU] = "EQHXZ8M8AV"'
 )
-PATCH_FILES = ("zh-CN.json", "ide-zh-CN.json", "i18n-runtime.js", "ide-localization.mjs")
+PATCH_FILES = ("switch_language.py", "zh-CN.json", "ide-zh-CN.json", "i18n-runtime.js", "ide-localization.mjs")
 
 
 def find_original():
@@ -102,8 +102,7 @@ def prepare(original, state):
         if source_digest(staged) != source:
             raise ValueError("复制期间原版 IDE 有更新，请再运行一次。")
         patch_copy(staged, files, marker)
-        run("/usr/bin/codesign", "--force", "--sign", "-", "--options", "runtime",
-            "--preserve-metadata=identifier,entitlements,runtime", str(staged))
+        sign_local_copy(staged)
         verify_signature(staged)
         target.parent.mkdir(mode=0o700, exist_ok=True)
         staged.rename(target)

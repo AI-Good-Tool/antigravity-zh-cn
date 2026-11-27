@@ -47,6 +47,19 @@ def verify_signature(app, official=False):
     run(*args, str(app))
 
 
+def sign_local_copy(app):
+    entitlements_xml = run("/usr/bin/codesign", "-d", "--entitlements", ":-", str(app))
+    entitlements = plistlib.loads(entitlements_xml.encode()) if entitlements_xml else {}
+    # The ad-hoc executable has no Team ID. It loads the verified,
+    # Google-signed frameworks from the original bundle.
+    entitlements["com.apple.security.cs.disable-library-validation"] = True
+    entitlements_path = app.parent / "local-signing-entitlements.plist"
+    entitlements_path.write_bytes(plistlib.dumps(entitlements))
+    run("/usr/bin/codesign", "--force", "--sign", "-", "--options", "runtime",
+        "--entitlements", str(entitlements_path),
+        "--preserve-metadata=identifier,runtime", str(app))
+
+
 def find_original():
     for path in (Path("/Applications") / APP_NAME, Path.home() / "Applications" / APP_NAME):
         if (path / ARCHIVE).is_file() and (path / PLIST).is_file():
@@ -244,8 +257,7 @@ def build_copy(original, target, marker, dictionary, runtime, update_script):
         info["ElectronAsarIntegrity"][ARCHIVE_KEY]["hash"] = header_hash
         (staged / PLIST).write_bytes(plistlib.dumps(info))
         (staged / MARKER).write_text(json.dumps(marker) + "\n", encoding="utf-8")
-        run("/usr/bin/codesign", "--force", "--sign", "-", "--options", "runtime",
-            "--preserve-metadata=identifier,entitlements,runtime", str(staged))
+        sign_local_copy(staged)
         verify_signature(staged)
         snapshot(staged)
         target.parent.mkdir(mode=0o700, exist_ok=True)
