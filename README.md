@@ -3,9 +3,9 @@
 在 macOS 或 Windows 上一键打开 Google Antigravity 桌面版和 Antigravity IDE 的简体中文界面，也可以一键切回英文。脚本从 Google 官方应用生成单独的中文副本，切回英文时打开官方原版。
 
 <p align="center">
-  <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.0/Antigravity-macOS-zh-CN.zip"><picture><source
+  <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/macos-v1.0.1/Antigravity-macOS-zh-CN.zip"><picture><source
     media="(min-width: 600px)" srcset="docs/downloads/macos.svg" width="208" height="80"><img
-    src="docs/downloads/macos.svg" width="48%" alt="下载 macOS 版 ZIP。App 2.35.1（兼容 2.34.0），IDE 2.8.0。"></picture></a>
+    src="docs/downloads/macos.svg" width="48%" alt="下载 macOS 版 ZIP。App 2.35.2，IDE 2.8.0。"></picture></a>
   <a href="https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/download/windows-v1.0.0/Antigravity-Windows-zh-CN.zip"><picture><source
     media="(min-width: 600px)" srcset="docs/downloads/windows.svg" width="208" height="80"><img
     src="docs/downloads/windows.svg" width="48%" alt="下载 Windows 版 ZIP。App 2.35.1，IDE 2.8.0。"></picture></a>
@@ -15,12 +15,14 @@
 
 ## 适配版本
 
-下表列出截至 **2026 年 11 月 25 日**验证的版本。[Google Antigravity 下载页](https://antigravity.google/download)
+下表列出各平台下载包已验证的应用版本。[Google Antigravity 下载页](https://antigravity.google/download)
 
 | 平台 | Antigravity App（桌面版） | Antigravity IDE（独立版） |
 | --- | --- | --- |
 | Windows 11 x64 | **2.35.1** | **2.8.0** |
-| macOS 26.7（Apple Silicon） | **2.35.1**，兼容 **2.34.0** | **2.8.0** |
+| macOS 26.7（Apple Silicon） | **2.35.2** | **2.8.0** |
+
+macOS 上使用桌面版 2.35.1 或 2.34.0 时，可以下载此前验证过的脚本。[macOS v1.0.0](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/tag/macos-v1.0.0)
 
 桌面版覆盖常用菜单、设置、操作按钮、模型标签、推理强度和模型提示。IDE 覆盖 Antigravity 设置、智能体面板、模型菜单和部分内置技能说明。IDE 的编辑器菜单和通用设置由 Microsoft 简体中文语言包翻译。
 
@@ -82,7 +84,7 @@ Antigravity IDE 2.8.0 的中文通用设置，左侧项目名称已打码。
 ### 使用前准备
 
 1. 从 Google 官网安装桌面版或独立 IDE。把相应的 `Antigravity.app` 或 `Antigravity IDE.app` 放在「应用程序」目录（`/Applications` 或 `~/Applications`）。[官方下载](https://antigravity.google/download)
-2. 打开 macOS Release，在 **Assets** 下载 **`Antigravity-macOS-zh-CN.zip`**。在访达双击 ZIP 解压，保留整个文件夹。四个 `.command` 脚本都在解压目录的第一层，并从同一个目录读取词库和翻译代码。[macOS Release](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/tag/macos-v1.0.0)
+2. 打开 macOS Release，在 **Assets** 下载 **`Antigravity-macOS-zh-CN.zip`**。在访达双击 ZIP 解压，保留整个文件夹。四个 `.command` 脚本都在解压目录的第一层，并从同一个目录读取词库和翻译代码。[macOS Release](https://github.com/AI-Good-Tool/antigravity-zh-cn/releases/tag/macos-v1.0.1)
 3. 确认终端可以执行 `/usr/bin/python3 --version`。如果 macOS 提示安装命令行开发者工具，可以运行 `xcode-select --install`，安装完成后再运行脚本。
 4. **使用 IDE 时**，先在官方 IDE 按 `⇧⌘X` 打开扩展面板，搜索并安装 `MS-CEINTL.vscode-language-pack-zh-hans`。也可以下载 `.vsix`，通过命令面板的 **Extensions: Install from VSIX…** 安装。语言包会翻译编辑器自身的菜单和设置。[Microsoft 简体中文语言包](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 

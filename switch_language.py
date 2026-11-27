@@ -166,6 +166,7 @@ def make_replacements(archive, original, dictionary, runtime, update_script):
 
     # The existing isolated preload may update display text on the local app page.
     translations = json.loads(dictionary)
+    translations["isDesktopApp"] = True
     translations["exact"]["Restart to Update"] = "用官方版更新"
     data = json.dumps(translations, ensure_ascii=True, separators=(",", ":"))
     preload += (

@@ -18,8 +18,9 @@
 
   function createI18nEngine(dictData) {
     var data = dictData || {};
-    var exactDict = data.exact || {};
-    var allPatterns = (data.patterns || []).concat(data.rules || []);
+    var desktop = data.isDesktopApp ? data.desktop : null;
+    var exactDict = desktop ? Object.assign({}, data.exact, desktop.exact) : (data.exact || {});
+    var allPatterns = (data.patterns || []).concat(data.rules || [], desktop?.patterns || []);
     var patterns = allPatterns.map(function (p) {
       return {
         regex: new RegExp(p.regex),
@@ -205,7 +206,8 @@
 
   var I18N_DATA = (root && root.__AGY_I18N_DATA__) || { exact: {}, patterns: [] };
   var officialPluginDescriptions = I18N_DATA.officialPluginDescriptions;
-  var officialSkillDescriptions = I18N_DATA.officialSkillDescriptions;
+  var desktopData = I18N_DATA.isDesktopApp ? I18N_DATA.desktop : null;
+  var officialCustomizationRows = desktopData?.customizationRows || I18N_DATA.officialSkillDescriptions;
   var defaultEngine = createI18nEngine(I18N_DATA);
   var exactDict = defaultEngine.exactDict;
   var patterns = defaultEngine.patterns;
@@ -328,7 +330,9 @@
   function isModelSelectorUi(el) {
     // Grouped model rows have a test ID on their name rather than on the row.
     return MODEL_SELECTOR_TEST_IDS[el.getAttribute('data-testid')] === 1 ||
-      (el.classList.contains('agy-overlay-item') && !!el.querySelector('[data-testid="model-selector-effort-group"]'));
+      (el.classList.contains('agy-overlay-item') && !!el.querySelector('[data-testid="model-selector-effort-group"]')) ||
+      (desktopData && el.tagName === 'SPAN' && el.classList.contains('opacity-70') &&
+        el.parentElement?.id.startsWith('orchestrator-picker-value-'));
   }
 
   function translateModelSelectorText(text) {
@@ -369,12 +373,17 @@
     return opening + '将于 ' + dateLabel + '下线。';
   }
 
+  var customizationsView = '[data-testid="workspace-customizations-view"]';
+  var customizationName = 'span.font-medium.truncate[data-tooltip-id]';
+  var customizationDescription = 'div.text-muted-foreground.line-clamp-2.mt-1';
+  var customizationRowText = customizationName + ', ' + customizationDescription;
+
   function isCustomizationContent(el) {
     // App 2.31.2 uses the same workspace view for project and unassigned settings.
     // These leaves carry author metadata; their neighboring actions and headings
     // are ordinary UI. Test classes before looking up their scoped container.
-    if (el.matches('span.font-medium.truncate[data-tooltip-id], div.text-muted-foreground.line-clamp-2.mt-1, span.text-purple-400, span.text-green-400') &&
-        el.closest('[data-testid="workspace-customizations-view"]')) return true;
+    if (el.matches(customizationRowText + ', span.text-purple-400, span.text-green-400') &&
+        el.closest(customizationsView)) return true;
     if (el.matches('div.font-medium.text-foreground.truncate, div.text-sm.text-muted-foreground.truncate, img') &&
         el.closest('[data-testid="customization-card"][data-card-name]')) return true;
     if (el.matches('h3.font-semibold.truncate, p.text-muted-foreground.line-clamp-3[title]') &&
@@ -784,23 +793,41 @@
   var textEdits = new WeakMap();
   var attributeEdits = new WeakMap();
 
-  function translateOfficialSkillDescription(el) {
-    if (!officialSkillDescriptions || !el?.matches('div.text-muted-foreground.line-clamp-2.mt-1') ||
-        !el.closest('[data-testid="workspace-customizations-view"]') ||
+  function translateOfficialCustomizationRow(el) {
+    if (!officialCustomizationRows || !el?.matches(customizationRowText) ||
+        !el.closest(customizationsView) ||
         getElementTranslationMode(el.parentElement) !== 2) return false;
-    var name = el.previousElementSibling?.querySelector('span.font-medium.truncate[data-tooltip-id]')?.textContent.trim();
-    var entry = Object.hasOwn(officialSkillDescriptions, name) && officialSkillDescriptions[name];
-    var node = el.firstChild;
-    if (!entry || node?.nodeType !== 3 || node.nextSibling) return false;
-    var edit = textEdits.get(node);
-    var source = edit?.localized === node.nodeValue ? edit.source : node.nodeValue;
-    if (normalizeWhitespace(source) !== entry.source) return false;
-    writeLocalizedText(node, entry.translation, 'official-skill-description');
+    var isName = el.matches(customizationName);
+    if (isName && !desktopData) return false;
+    var name = isName ? el : el.previousElementSibling?.firstElementChild;
+    var description = isName ? el.parentElement.nextElementSibling : el;
+    if (!name?.matches(customizationName) || !description?.matches(customizationDescription)) return false;
+
+    // The shared row component also renders custom skills and rules. Match both
+    // fields before changing display text, leaving actions and file paths intact.
+    var nameText = name.firstChild;
+    var descriptionText = description.firstChild;
+    if (nameText?.nodeType !== 3 || nameText.nextSibling ||
+        descriptionText?.nodeType !== 3 || descriptionText.nextSibling) return false;
+    var nameEdit = textEdits.get(nameText);
+    var descriptionEdit = textEdits.get(descriptionText);
+    var sourceName = (nameEdit?.localized === nameText.nodeValue ? nameEdit.source : nameText.nodeValue).trim();
+    var sourceDescription = descriptionEdit?.localized === descriptionText.nodeValue ? descriptionEdit.source : descriptionText.nodeValue;
+    var entry = Object.hasOwn(officialCustomizationRows, sourceName) && officialCustomizationRows[sourceName];
+    if (!entry || normalizeWhitespace(sourceDescription) !== entry.source ||
+        name.hasAttribute('data-ag-localization-skip') || description.hasAttribute('data-ag-localization-skip') ||
+        getElementTranslationMode(name.parentElement) !== 2) {
+      restoreLocalizedText(nameText);
+      restoreLocalizedText(descriptionText);
+      return false;
+    }
+    if (entry.label) writeLocalizedText(nameText, entry.label, 'official-customization-row');
+    writeLocalizedText(descriptionText, entry.translation, 'official-customization-row');
     return true;
   }
 
-  function translateProtectedDescription(el) {
-    return translateOfficialSkillDescription(el) || translateOfficialPluginDescription(el);
+  function translateProtectedContent(el) {
+    return translateOfficialCustomizationRow(el) || translateOfficialPluginDescription(el);
   }
 
   function translateOfficialPluginDescription(el) {
@@ -927,11 +954,11 @@
     var mode = parentMode === undefined ? getElementTranslationMode(parent) : parentMode;
     var modelSelector = mode === MODEL_SELECTOR_MODE;
     if (parent && ((!modelSelector && mode !== 2) || parent.tagName === 'INPUT' || parent.tagName === 'TEXTAREA')) {
-      if (mode !== 0 || !translateProtectedDescription(parent)) restoreLocalizedText(node);
+      if (mode !== 0 || !translateProtectedContent(parent)) restoreLocalizedText(node);
       return;
     }
     var edit = textEdits.get(node);
-    if (edit?.scope === 'official-plugin-description' || edit?.scope === 'official-skill-description') {
+    if (edit?.scope === 'official-plugin-description' || edit?.scope === 'official-customization-row') {
       restoreLocalizedText(node);
       return;
     }
@@ -1033,7 +1060,7 @@
     if (scanId && el._agyScanId === scanId) return;
     var translationMode = getElementTranslationMode(el);
     if (translationMode === 0) {
-      if (translateProtectedDescription(el)) return;
+      if (translateProtectedContent(el)) return;
       if (work) {
         restoreLocalizedAttributes(el);
         appendChildren(el, work);
@@ -1108,7 +1135,9 @@
     // 遍历子节点
     // 联合文本自愈：如果元素直接子节点全为纯文本节点且数量 > 1（常见于 React 碎片化模板拆分，如 "All ", e, "s run as Flash."）
     var first = el.firstChild;
-    if (translateOwnContent && first && first.nextSibling) {
+    // The plan and its ADC indicator are separate fields that can update independently.
+    var planLabel = desktopData && first?.nodeValue?.startsWith('Your plan: ');
+    if (translateOwnContent && first && first.nextSibling && !planLabel) {
       var allText = true;
       var cur = first;
       while (cur) {
